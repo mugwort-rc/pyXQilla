@@ -6,4 +6,4 @@ from __XQilla import *
 XQillaPlatformUtils.initialize()
 
 # XQillaImplementation
-gXPath2_3_0 = Xerces.XMLString('XPath2 3.0')
+gXPath2_3_0 = XMLString('XPath2 3.0')

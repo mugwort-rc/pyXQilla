@@ -8,7 +8,10 @@
 #include "XQillaPlatformUtils.h"
 
 #include <boost/python.hpp>
-#include <xercesc/framework/MemoryManager.hpp>	//!< for forward declaration
+
+//! for forward declaration
+#include <xercesc/framework/MemoryManager.hpp>
+
 #include <xqilla/utils/XQillaPlatformUtils.hpp>
 
 namespace pyxqilla {
