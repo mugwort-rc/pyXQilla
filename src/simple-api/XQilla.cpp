@@ -23,7 +23,7 @@
 
 namespace pyxqilla {
 
-template <class STR>
+template <typename STR>
 class XQillaDefVisitor
 : public boost::python::def_visitor<XQillaDefVisitor<STR> >
 {
@@ -32,63 +32,63 @@ public:
 template <class T>
 void visit(T& class_) const {
 	class_
-	.def("parse", static_cast<XQQuery*(*)(const STR&, DynamicContext*, const STR&, unsigned int, xercesc::MemoryManager*, XQQuery*)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parse", static_cast<XQQuery*(*)(const STR&, DynamicContext*, const STR&, unsigned int, xercesc::MemoryManager*)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parse", static_cast<XQQuery*(*)(const STR&, DynamicContext*, const STR&, unsigned int)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parse", static_cast<XQQuery*(*)(const STR&, DynamicContext*, const STR&)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parse", static_cast<XQQuery*(*)(const STR&, DynamicContext*)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parse", static_cast<XQQuery*(*)(const STR&)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parseFromURI", static_cast<XQQuery*(*)(const STR&, DynamicContext*, unsigned int, xercesc::MemoryManager*, XQQuery*)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parseFromURI", static_cast<XQQuery*(*)(const STR&, DynamicContext*, unsigned int, xercesc::MemoryManager*)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parseFromURI", static_cast<XQQuery*(*)(const STR&, DynamicContext*, unsigned int)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parseFromURI", static_cast<XQQuery*(*)(const STR&, DynamicContext*)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
-	.def("parseFromURI", static_cast<XQQuery*(*)(const STR&)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parse", static_cast<XQQuery*(*)(const STR, DynamicContext*, const STR, unsigned int, xercesc::MemoryManager*, XQQuery*)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parse", static_cast<XQQuery*(*)(const STR, DynamicContext*, const STR, unsigned int, xercesc::MemoryManager*)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parse", static_cast<XQQuery*(*)(const STR, DynamicContext*, const STR, unsigned int)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parse", static_cast<XQQuery*(*)(const STR, DynamicContext*, const STR)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parse", static_cast<XQQuery*(*)(const STR, DynamicContext*)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parse", static_cast<XQQuery*(*)(const STR)>(&XQillaDefVisitor::parse), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parseFromURI", static_cast<XQQuery*(*)(const STR, DynamicContext*, unsigned int, xercesc::MemoryManager*, XQQuery*)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parseFromURI", static_cast<XQQuery*(*)(const STR, DynamicContext*, unsigned int, xercesc::MemoryManager*)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parseFromURI", static_cast<XQQuery*(*)(const STR, DynamicContext*, unsigned int)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parseFromURI", static_cast<XQQuery*(*)(const STR, DynamicContext*)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
+	.def("parseFromURI", static_cast<XQQuery*(*)(const STR)>(&XQillaDefVisitor::parseFromURI), boost::python::return_value_policy<boost::python::reference_existing_object>())
 	;
 }
 
-static XQQuery* parse(const STR& query, DynamicContext* context, const STR& queryFile, unsigned int flags, xercesc::MemoryManager* memMgr, XQQuery *result) {
+static XQQuery* parse(const STR query, DynamicContext* context, const STR queryFile, unsigned int flags, xercesc::MemoryManager* memMgr, XQQuery *result) {
 	pyxerces::XMLString buff1(query), buff2(queryFile);
 	return XQilla::parse(buff1.ptr(), context, buff2.ptr(), flags, memMgr, result);
 }
 
-static XQQuery* parse(const STR& query, DynamicContext* context, const STR& queryFile, unsigned int flags, xercesc::MemoryManager* memMgr) {
+static XQQuery* parse(const STR query, DynamicContext* context, const STR queryFile, unsigned int flags, xercesc::MemoryManager* memMgr) {
 	return parse(query, context, queryFile, flags, memMgr, nullptr);
 }
 
-static XQQuery* parse(const STR& query, DynamicContext* context, const STR& queryFile, unsigned int flags) {
+static XQQuery* parse(const STR query, DynamicContext* context, const STR queryFile, unsigned int flags) {
 	return parse(query, context, queryFile, flags, xercesc::XMLPlatformUtils::fgMemoryManager);
 }
 
-static XQQuery* parse(const STR& query, DynamicContext* context, const STR& queryFile) {
+static XQQuery* parse(const STR query, DynamicContext* context, const STR queryFile) {
 	return parse(query, context, queryFile, 0);
 }
 
-static XQQuery* parse(const STR& query, DynamicContext* context) {
+static XQQuery* parse(const STR query, DynamicContext* context) {
 	return parse(query, context, STR());
 }
 
-static XQQuery* parse(const STR& query) {
+static XQQuery* parse(const STR query) {
 	return parse(query, nullptr);
 }
 
-static XQQuery* parseFromURI(const STR& queryFile, DynamicContext* context, unsigned int flags, xercesc::MemoryManager *memMgr, XQQuery *result) {
+static XQQuery* parseFromURI(const STR queryFile, DynamicContext* context, unsigned int flags, xercesc::MemoryManager *memMgr, XQQuery *result) {
 	pyxerces::XMLString buff(queryFile);
 	return XQilla::parseFromURI(buff.ptr(), context, flags, memMgr, result);
 }
 
-static XQQuery* parseFromURI(const STR& queryFile, DynamicContext* context, unsigned int flags, xercesc::MemoryManager *memMgr) {
+static XQQuery* parseFromURI(const STR queryFile, DynamicContext* context, unsigned int flags, xercesc::MemoryManager *memMgr) {
 	return parseFromURI(queryFile, context, flags, memMgr, nullptr);
 }
 
-static XQQuery* parseFromURI(const STR& queryFile, DynamicContext* context, unsigned int flags) {
+static XQQuery* parseFromURI(const STR queryFile, DynamicContext* context, unsigned int flags) {
 	return parseFromURI(queryFile, context, flags, xercesc::XMLPlatformUtils::fgMemoryManager);
 }
 
-static XQQuery* parseFromURI(const STR& queryFile, DynamicContext* context) {
+static XQQuery* parseFromURI(const STR queryFile, DynamicContext* context) {
 	return parseFromURI(queryFile, context, 0);
 }
 
-static XQQuery* parseFromURI(const STR& queryFile) {
+static XQQuery* parseFromURI(const STR queryFile) {
 	return parseFromURI(queryFile, nullptr);
 }
 
@@ -103,7 +103,7 @@ BOOST_PYTHON_FUNCTION_OVERLOADS(XQillaCreateContextOverloads, XQilla::createCont
 void XQilla_init(void) {
 	//! XQilla
 	auto PyXQilla = boost::python::class_<XQilla, boost::noncopyable>("XQilla", boost::python::init<boost::python::optional<xercesc::MemoryManager*> >())
-			.def(XQillaDefVisitor<std::string>())
+			.def(XQillaDefVisitor<char*>())
 			.def("parse", static_cast<XQQuery*(*)(const XMLCh*, DynamicContext*, const XMLCh*, unsigned int, xercesc::MemoryManager*, XQQuery*)>(&XQilla::parse), XQillaParseOverloads()[boost::python::return_value_policy<boost::python::reference_existing_object>()])
 			.def("parse", static_cast<XQQuery*(*)(const xercesc::InputSource&, DynamicContext*, unsigned int, xercesc::MemoryManager*, XQQuery*)>(&XQilla::parse), XQillaParseFromInputSourceOverloads()[boost::python::return_value_policy<boost::python::reference_existing_object>()])
 			.def("parseFromURI", &XQilla::parseFromURI, XQillaParseFromURIOverloads()[boost::python::return_value_policy<boost::python::reference_existing_object>()])

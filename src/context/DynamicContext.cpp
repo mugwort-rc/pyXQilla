@@ -29,7 +29,7 @@
 
 namespace pyxqilla {
 
-template <class STR>
+template <typename STR>
 class DynamicContextDefVisitor
 : public boost::python::def_visitor<DynamicContextDefVisitor<STR> >
 {
@@ -38,55 +38,55 @@ public:
 template <class T>
 void visit(T& class_) const {
 	class_
-	.def("setExternalVariable", static_cast<void(*)(DynamicContext&, const STR&, const STR&, const Result&)>(&DynamicContextDefVisitor::setExternalVariable))
-	.def("setExternalVariable", static_cast<void(*)(DynamicContext&, const STR&, const Result&)>(&DynamicContextDefVisitor::setExternalVariable))
-	.def("resolveDocument", static_cast<Sequence(*)(DynamicContext&, const STR&, const LocationInfo*, const QueryPathNode*)>(&DynamicContextDefVisitor::resolveDocument))
-	.def("resolveDocument", static_cast<Sequence(*)(DynamicContext&, const STR&, const LocationInfo*)>(&DynamicContextDefVisitor::resolveDocument))
-	.def("resolveDocument", static_cast<Sequence(*)(DynamicContext&, const STR&)>(&DynamicContextDefVisitor::resolveDocument))
-	.def("resolveCollection", static_cast<Sequence(*)(DynamicContext&, const STR&, const LocationInfo*, const QueryPathNode*)>(&DynamicContextDefVisitor::resolveCollection))
-	.def("resolveCollection", static_cast<Sequence(*)(DynamicContext&, const STR&, const LocationInfo*)>(&DynamicContextDefVisitor::resolveCollection))
-	.def("resolveCollection", static_cast<Sequence(*)(DynamicContext&, const STR&)>(&DynamicContextDefVisitor::resolveCollection))
+	.def("setExternalVariable", static_cast<void(*)(DynamicContext&, const STR, const STR, const Result&)>(&DynamicContextDefVisitor::setExternalVariable))
+	.def("setExternalVariable", static_cast<void(*)(DynamicContext&, const STR, const Result&)>(&DynamicContextDefVisitor::setExternalVariable))
+	.def("resolveDocument", static_cast<Sequence(*)(DynamicContext&, const STR, const LocationInfo*, const QueryPathNode*)>(&DynamicContextDefVisitor::resolveDocument))
+	.def("resolveDocument", static_cast<Sequence(*)(DynamicContext&, const STR, const LocationInfo*)>(&DynamicContextDefVisitor::resolveDocument))
+	.def("resolveDocument", static_cast<Sequence(*)(DynamicContext&, const STR)>(&DynamicContextDefVisitor::resolveDocument))
+	.def("resolveCollection", static_cast<Sequence(*)(DynamicContext&, const STR, const LocationInfo*, const QueryPathNode*)>(&DynamicContextDefVisitor::resolveCollection))
+	.def("resolveCollection", static_cast<Sequence(*)(DynamicContext&, const STR, const LocationInfo*)>(&DynamicContextDefVisitor::resolveCollection))
+	.def("resolveCollection", static_cast<Sequence(*)(DynamicContext&, const STR)>(&DynamicContextDefVisitor::resolveCollection))
 	.def("putDocument", &DynamicContextDefVisitor::putDocument)
 	;
 }
 
-static void setExternalVariable(DynamicContext& self, const STR& namespaceURI, const STR& name, const Result& value) {
+static void setExternalVariable(DynamicContext& self, const STR namespaceURI, const STR name, const Result& value) {
 	pyxerces::XMLString buff1(namespaceURI), buff2(name);
 	return self.setExternalVariable(buff1.ptr(), buff2.ptr(), value);
 }
 
-static void setExternalVariable(DynamicContext& self, const STR& qname, const Result& value) {
+static void setExternalVariable(DynamicContext& self, const STR qname, const Result& value) {
 	pyxerces::XMLString buff(qname);
 	return self.setExternalVariable(buff.ptr(), value);
 }
 
-static Sequence resolveDocument(DynamicContext& self, const STR& uri, const LocationInfo *location, const QueryPathNode *projection) {
+static Sequence resolveDocument(DynamicContext& self, const STR uri, const LocationInfo *location, const QueryPathNode *projection) {
 	pyxerces::XMLString buff(uri);
 	return self.resolveDocument(buff.ptr(), location, projection);
 }
 
-static Sequence resolveDocument(DynamicContext& self, const STR& uri, const LocationInfo *location) {
+static Sequence resolveDocument(DynamicContext& self, const STR uri, const LocationInfo *location) {
 	return resolveDocument(self, uri, location, nullptr);
 }
 
-static Sequence resolveDocument(DynamicContext& self, const STR& uri) {
+static Sequence resolveDocument(DynamicContext& self, const STR uri) {
 	return resolveDocument(self, uri, nullptr);
 }
 
-static Sequence resolveCollection(DynamicContext& self, const STR& uri, const LocationInfo *location, const QueryPathNode *projection) {
+static Sequence resolveCollection(DynamicContext& self, const STR uri, const LocationInfo *location, const QueryPathNode *projection) {
 	pyxerces::XMLString buff(uri);
 	return self.resolveCollection(buff.ptr(), location, projection);
 }
 
-static Sequence resolveCollection(DynamicContext& self, const STR& uri, const LocationInfo *location) {
+static Sequence resolveCollection(DynamicContext& self, const STR uri, const LocationInfo *location) {
 	return resolveCollection(self, uri, location, nullptr);
 }
 
-static Sequence resolveCollection(DynamicContext& self, const STR& uri) {
+static Sequence resolveCollection(DynamicContext& self, const STR uri) {
 	return resolveCollection(self, uri, nullptr);
 }
 
-static bool putDocument(DynamicContext& self, Node::Ptr& document, const STR& uri) {
+static bool putDocument(DynamicContext& self, Node::Ptr& document, const STR uri) {
 	pyxerces::XMLString buff(uri);
 	return self.putDocument(document, buff.ptr());
 }
@@ -103,7 +103,7 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(DynamicCOntextResolveDefaultCollectionOve
 void DynamicContext_init(void) {
 	//! DynamicContext
 	boost::python::class_<DynamicContext, boost::noncopyable>("DynamicContext", boost::python::no_init)
-			.def(DynamicContextDefVisitor<std::string>())
+			.def(DynamicContextDefVisitor<char*>())
 			.def("createModuleDynamicContext", &DynamicContext::createModuleDynamicContext, DynamicContextCreateModuleDynamicContextOverloads()[boost::python::return_value_policy<boost::python::reference_existing_object>()])
 			.def("clearDynamicContext", &DynamicContext::clearDynamicContext)
 			.def("getContextItem", &DynamicContext::getContextItem)

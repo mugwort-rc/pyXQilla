@@ -22,7 +22,7 @@
 
 namespace pyxqilla {
 
-template <class STR>
+template <typename STR>
 class ModuleCacheDefVisitor
  : public boost::python::def_visitor<ModuleCacheDefVisitor<STR> >
 {
@@ -36,19 +36,19 @@ void visit(T& class_) const {
 	;
 }
 
-static XQQuery* getByURI(ModuleCache& self, const STR& uri) {
+static XQQuery* getByURI(ModuleCache& self, const STR uri) {
 	pyxerces::XMLString buff(uri);
 	return self.getByURI(buff.ptr());
 }
 
-static XQQuery* getByNamespace(ModuleCache& self, const STR& ns) {
+static XQQuery* getByNamespace(ModuleCache& self, const STR ns) {
 	pyxerces::XMLString buff(ns);
 	return self.getByNamespace(buff.ptr());
 }
 
 };
 
-template <class STR>
+template <typename STR>
 class XQQueryDefVisitor
  : public boost::python::def_visitor<XQQueryDefVisitor<STR> >
 {
@@ -57,13 +57,13 @@ public:
 template<class T>
 void visit(T& class_) const {
 	class_
-	.def("execute", static_cast<Result(*)(XQQuery&, const STR&, DynamicContext*)>(&XQQueryDefVisitor::execute))
-	.def("execute", static_cast<void(*)(XQQuery&, EventHandler*, const STR&, DynamicContext*)>(&XQQueryDefVisitor::execute))
+	.def("execute", static_cast<Result(*)(XQQuery&, const STR, DynamicContext*)>(&XQQueryDefVisitor::execute))
+	.def("execute", static_cast<void(*)(XQQuery&, EventHandler*, const STR, DynamicContext*)>(&XQQueryDefVisitor::execute))
 	.def("setQueryText", &XQQueryDefVisitor::setQueryText)
-	.def("addDelayedFunction", static_cast<void(*)(XQQuery&, const STR&, const STR&, size_t, const STR&, bool, int, int)>(&XQQueryDefVisitor::addDelayedFunction))
-	.def("addDelayedFunction", static_cast<void(*)(XQQuery&, const STR&, const STR&, size_t, const STR&, bool, int)>(&XQQueryDefVisitor::addDelayedFunction))
-	.def("addDelayedFunction", static_cast<void(*)(XQQuery&, const STR&, const STR&, size_t, const STR&, bool)>(&XQQueryDefVisitor::addDelayedFunction))
-	.def("addDelayedFunction", static_cast<void(*)(XQQuery&, const STR&, const STR&, size_t, const STR&)>(&XQQueryDefVisitor::addDelayedFunction))
+	.def("addDelayedFunction", static_cast<void(*)(XQQuery&, const STR, const STR, size_t, const STR, bool, int, int)>(&XQQueryDefVisitor::addDelayedFunction))
+	.def("addDelayedFunction", static_cast<void(*)(XQQuery&, const STR, const STR, size_t, const STR, bool, int)>(&XQQueryDefVisitor::addDelayedFunction))
+	.def("addDelayedFunction", static_cast<void(*)(XQQuery&, const STR, const STR, size_t, const STR, bool)>(&XQQueryDefVisitor::addDelayedFunction))
+	.def("addDelayedFunction", static_cast<void(*)(XQQuery&, const STR, const STR, size_t, const STR)>(&XQQueryDefVisitor::addDelayedFunction))
 	.def("setFile", &XQQueryDefVisitor::setFile)
 	.def("setModuleTargetNamespace", &XQQueryDefVisitor::setModuleTargetNamespace)
 	.def("importModule", &XQQueryDefVisitor::importModule)
@@ -72,62 +72,62 @@ void visit(T& class_) const {
 	;
 }
 
-static Result execute(XQQuery& self, const STR& templateQName, DynamicContext* context) {
+static Result execute(XQQuery& self, const STR templateQName, DynamicContext* context) {
 	pyxerces::XMLString buff(templateQName);
 	return self.execute(buff.ptr(), context);
 }
 
-static void execute(XQQuery& self, EventHandler* events, const STR& templateQName, DynamicContext* context) {
+static void execute(XQQuery& self, EventHandler* events, const STR templateQName, DynamicContext* context) {
 	pyxerces::XMLString buff(templateQName);
 	self.execute(events, buff.ptr(), context);
 }
 
-static void setQueryText(XQQuery& self, const STR& v) {
+static void setQueryText(XQQuery& self, const STR v) {
 	pyxerces::XMLString buff(v);
 	self.setQueryText(buff.ptr());
 }
 
-static void addDelayedFunction(XQQuery& self, const STR& uri, const STR& name, size_t numArgs, const STR& functionDeclaration, bool isPrivate, int line, int column) {
+static void addDelayedFunction(XQQuery& self, const STR uri, const STR name, size_t numArgs, const STR functionDeclaration, bool isPrivate, int line, int column) {
 	pyxerces::XMLString buff1(uri), buff2(name), buff3(functionDeclaration);
 	self.addDelayedFunction(buff1.ptr(), buff2.ptr(), numArgs, buff3.ptr(), isPrivate, line, column);
 }
 
-static void addDelayedFunction(XQQuery& self, const STR& uri, const STR& name, size_t numArgs, const STR& functionDeclaration, bool isPrivate, int line) {
+static void addDelayedFunction(XQQuery& self, const STR uri, const STR name, size_t numArgs, const STR functionDeclaration, bool isPrivate, int line) {
 	pyxerces::XMLString buff1(uri), buff2(name), buff3(functionDeclaration);
 	self.addDelayedFunction(buff1.ptr(), buff2.ptr(), numArgs, buff3.ptr(), isPrivate, line, 1);
 }
 
-static void addDelayedFunction(XQQuery& self, const STR& uri, const STR& name, size_t numArgs, const STR& functionDeclaration, bool isPrivate) {
+static void addDelayedFunction(XQQuery& self, const STR uri, const STR name, size_t numArgs, const STR functionDeclaration, bool isPrivate) {
 	pyxerces::XMLString buff1(uri), buff2(name), buff3(functionDeclaration);
 	self.addDelayedFunction(buff1.ptr(), buff2.ptr(), numArgs, buff3.ptr(), isPrivate, 1);
 }
 
-static void addDelayedFunction(XQQuery& self, const STR& uri, const STR& name, size_t numArgs, const STR& functionDeclaration) {
+static void addDelayedFunction(XQQuery& self, const STR uri, const STR name, size_t numArgs, const STR functionDeclaration) {
 	pyxerces::XMLString buff1(uri), buff2(name), buff3(functionDeclaration);
 	self.addDelayedFunction(buff1.ptr(), buff2.ptr(), numArgs, buff3.ptr(), false);
 }
 
-static void setFile(XQQuery& self, const STR& file) {
+static void setFile(XQQuery& self, const STR file) {
 	pyxerces::XMLString buff(file);
 	self.setFile(buff.ptr());
 }
 
-static void setModuleTargetNamespace(XQQuery& self, const STR& uri) {
+static void setModuleTargetNamespace(XQQuery& self, const STR uri) {
 	pyxerces::XMLString buff(uri);
 	self.setModuleTargetNamespace(buff.ptr());
 }
 
-static void importModule(XQQuery& self, const STR& szUri, VectorOfStrings* locations, const LocationInfo* location) {
+static void importModule(XQQuery& self, const STR szUri, VectorOfStrings* locations, const LocationInfo* location) {
 	pyxerces::XMLString buff(szUri);
 	self.importModule(buff.ptr(), locations, location);
 }
 
-static XQQuery* findModuleForVariable(XQQuery& self, const STR& uri, const STR& name) {
+static XQQuery* findModuleForVariable(XQQuery& self, const STR uri, const STR name) {
 	pyxerces::XMLString buff1(uri), buff2(name);
 	return self.findModuleForVariable(buff1.ptr(), buff2.ptr());
 }
 
-static XQQuery* findModuleForFunction(XQQuery& self, const STR& uri, const STR& name, int numArgs) {
+static XQQuery* findModuleForFunction(XQQuery& self, const STR uri, const STR name, int numArgs) {
 	pyxerces::XMLString buff1(uri), buff2(name);
 	return self.findModuleForFunction(buff1.ptr(), buff2.ptr(), numArgs);
 }
@@ -144,14 +144,14 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(XQQuerySetIsLibraryModule, setIsLibraryMo
 void XQQuery_init(void) {
 	//! ModuleCache
 	boost::python::class_<ModuleCache, boost::noncopyable>("ModuleCache", boost::python::init<xercesc::MemoryManager*>())
-			.def(ModuleCacheDefVisitor<std::string>())
+			.def(ModuleCacheDefVisitor<char*>())
 			.def("put", &ModuleCache::put)
 			.def("getByURI", &ModuleCache::getByURI, boost::python::return_value_policy<boost::python::reference_existing_object>())
 			.def("getByNamespace", &ModuleCache::getByNamespace, boost::python::return_value_policy<boost::python::reference_existing_object>())
 			;
 	//! XQQuery
 	boost::python::class_<XQQuery, boost::noncopyable>("XQQuery", boost::python::no_init)
-			.def(XQQueryDefVisitor<std::string>())
+			.def(XQQueryDefVisitor<char*>())
 			.def("createDynamicContext", &XQQuery::createDynamicContext, XQQueryCreateDynamicContextOverloads()[boost::python::return_value_policy<boost::python::reference_existing_object>()])
 			.def("execute", static_cast<Result(XQQuery::*)(DynamicContext*) const>(&XQQuery::execute))
 			.def("execute", static_cast<Result(XQQuery::*)(const Item::Ptr&, DynamicContext*) const>(&XQQuery::execute))
