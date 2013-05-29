@@ -65,7 +65,7 @@ void visit(T& class_) const {
 	.def("generateEvents", static_cast<void(*)(RefCountPointer<const Item>&, EventHandler* events, const DynamicContext*, bool)>(&RefCountPointerConstItemDefVisitor::generateEvents))
 	.def("generateEvents", static_cast<void(*)(RefCountPointer<const Item>&, EventHandler* events, const DynamicContext*)>(&RefCountPointerConstItemDefVisitor::generateEvents))
 	.def("getInterface", static_cast<void*(*)(RefCountPointer<const Item>&, const XMLCh*)>(&RefCountPointerConstItemDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
-	.def("getInterface", static_cast<void*(*)(RefCountPointer<const Item>&, const std::string&)>(&RefCountPointerConstItemDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
+	.def("getInterface", static_cast<void*(*)(RefCountPointer<const Item>&, const char*)>(&RefCountPointerConstItemDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
 	.def("typeToBuffer", &RefCountPointerConstItemDefVisitor::typeToBuffer)
 	;
 }
@@ -110,7 +110,7 @@ static void* getInterface(RefCountPointer<const Item>& self, const XMLCh* name) 
 	return self->getInterface(name);
 }
 
-static void* getInterface(RefCountPointer<const Item>& self, const std::string& name) {
+static void* getInterface(RefCountPointer<const Item>& self, const char* name) {
 	pyxerces::XMLString buff(name);
 	return self->getInterface(buff.ptr());
 }
@@ -146,23 +146,23 @@ void visit(T& class_) const {
 	.def("generateEvents", static_cast<void(*)(RefCountPointer<const AnyAtomicType>&, EventHandler* events, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::generateEvents))
 	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castAs))
 	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castAsNoCheck))
-	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castAsNoCheck))
+	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castAsNoCheck))
 	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castAs))
-	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castAs))
+	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castAs))
 	.def("castable", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castable))
-	.def("castable", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castable))
+	.def("castable", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::castable))
 	.def("asString", &RefCountPointerConstAnyAtomicTypeDefVisitor::asString, boost::python::return_value_policy<boost::python::return_by_value>())
 	.def("equals", &RefCountPointerConstAnyAtomicTypeDefVisitor::equals)
 	.def("isOfType", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::isOfType))
-	.def("isOfType", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::isOfType))
+	.def("isOfType", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::isOfType))
 	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::isInstanceOfType))
-	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::isInstanceOfType))
+	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const AnyAtomicType>&, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::isInstanceOfType))
 	.def("typeToBuffer", &RefCountPointerConstAnyAtomicTypeDefVisitor::typeToBuffer)
 	.def("castIsSupported", &RefCountPointerConstAnyAtomicTypeDefVisitor::castIsSupported)
 	.def("getPrimitiveTypeIndex", &RefCountPointerConstAnyAtomicTypeDefVisitor::getPrimitiveTypeIndex)
 	//! Item
 	.def("getInterface", static_cast<void*(*)(RefCountPointer<const AnyAtomicType>&, const XMLCh*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
-	.def("getInterface", static_cast<void*(*)(RefCountPointer<const AnyAtomicType>&, const std::string&)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
+	.def("getInterface", static_cast<void*(*)(RefCountPointer<const AnyAtomicType>&, const char*)>(&RefCountPointerConstAnyAtomicTypeDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
 	;
 }
 
@@ -223,7 +223,7 @@ static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const AnyAtomicType>& se
 	return self->castAsNoCheck(targetIndex, targetURI, targetType, context);
 }
 
-static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const AnyAtomicType>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const AnyAtomicType>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castAsNoCheck(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -232,7 +232,7 @@ static AnyAtomicType::Ptr castAs(RefCountPointer<const AnyAtomicType>& self, Any
 	return self->castAs(targetIndex, targetURI, targetType, context);
 }
 
-static AnyAtomicType::Ptr castAs(RefCountPointer<const AnyAtomicType>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static AnyAtomicType::Ptr castAs(RefCountPointer<const AnyAtomicType>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castAs(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -241,7 +241,7 @@ static bool castable(RefCountPointer<const AnyAtomicType>& self, AnyAtomicType::
 	return self->castable(targetIndex, targetURI, targetType, context);
 }
 
-static bool castable(RefCountPointer<const AnyAtomicType>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool castable(RefCountPointer<const AnyAtomicType>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castable(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -258,7 +258,7 @@ static bool isOfType(RefCountPointer<const AnyAtomicType>& self, const XMLCh* ta
 	return self->isOfType(targetURI, targetType, context);
 }
 
-static bool isOfType(RefCountPointer<const AnyAtomicType>& self, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool isOfType(RefCountPointer<const AnyAtomicType>& self, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return isOfType(self, buff1.ptr(), buff2.ptr(), context);
 }
@@ -267,7 +267,7 @@ static bool isInstanceOfType(RefCountPointer<const AnyAtomicType>& self, const X
 	return self->isInstanceOfType(targetURI, targetType, context);
 }
 
-static bool isInstanceOfType(RefCountPointer<const AnyAtomicType>& self, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool isInstanceOfType(RefCountPointer<const AnyAtomicType>& self, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return isInstanceOfType(self, buff1.ptr(), buff2.ptr(), context);
 }
@@ -289,7 +289,7 @@ static void* getInterface(RefCountPointer<const AnyAtomicType>& self, const XMLC
 	return self->getInterface(name);
 }
 
-static void* getInterface(RefCountPointer<const AnyAtomicType>& self, const std::string& name) {
+static void* getInterface(RefCountPointer<const AnyAtomicType>& self, const char* name) {
 	pyxerces::XMLString buff(name);
 	return getInterface(self, buff.ptr());
 }
@@ -328,20 +328,20 @@ void visit(T& class_) const {
 	.def("generateEvents", static_cast<void(*)(RefCountPointer<const ATBooleanOrDerived>&, EventHandler* events, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::generateEvents))
 	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castAs))
 	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castAsNoCheck))
-	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castAsNoCheck))
+	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castAsNoCheck))
 	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castAs))
-	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castAs))
+	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castAs))
 	.def("castable", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castable))
-	.def("castable", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castable))
+	.def("castable", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::castable))
 	.def("isOfType", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::isOfType))
-	.def("isOfType", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::isOfType))
+	.def("isOfType", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::isOfType))
 	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::isInstanceOfType))
-	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::isInstanceOfType))
+	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const ATBooleanOrDerived>&, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::isInstanceOfType))
 	.def("typeToBuffer", &RefCountPointerConstATBooleanOrDerivedDefVisitor::typeToBuffer)
 	.def("castIsSupported", &RefCountPointerConstATBooleanOrDerivedDefVisitor::castIsSupported)
 	//! Item
 	.def("getInterface", static_cast<void*(*)(RefCountPointer<const ATBooleanOrDerived>&, const XMLCh*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
-	.def("getInterface", static_cast<void*(*)(RefCountPointer<const ATBooleanOrDerived>&, const std::string&)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
+	.def("getInterface", static_cast<void*(*)(RefCountPointer<const ATBooleanOrDerived>&, const char*)>(&RefCountPointerConstATBooleanOrDerivedDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
 	;
 }
 
@@ -427,7 +427,7 @@ static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const ATBooleanOrDerived
 	return self->castAsNoCheck(targetIndex, targetURI, targetType, context);
 }
 
-static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const ATBooleanOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const ATBooleanOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castAsNoCheck(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -436,7 +436,7 @@ static AnyAtomicType::Ptr castAs(RefCountPointer<const ATBooleanOrDerived>& self
 	return self->castAs(targetIndex, targetURI, targetType, context);
 }
 
-static AnyAtomicType::Ptr castAs(RefCountPointer<const ATBooleanOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static AnyAtomicType::Ptr castAs(RefCountPointer<const ATBooleanOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castAs(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -445,7 +445,7 @@ static bool castable(RefCountPointer<const ATBooleanOrDerived>& self, AnyAtomicT
 	return self->castable(targetIndex, targetURI, targetType, context);
 }
 
-static bool castable(RefCountPointer<const ATBooleanOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool castable(RefCountPointer<const ATBooleanOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castable(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -454,7 +454,7 @@ static bool isOfType(RefCountPointer<const ATBooleanOrDerived>& self, const XMLC
 	return self->isOfType(targetURI, targetType, context);
 }
 
-static bool isOfType(RefCountPointer<const ATBooleanOrDerived>& self, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool isOfType(RefCountPointer<const ATBooleanOrDerived>& self, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return isOfType(self, buff1.ptr(), buff2.ptr(), context);
 }
@@ -463,7 +463,7 @@ static bool isInstanceOfType(RefCountPointer<const ATBooleanOrDerived>& self, co
 	return self->isInstanceOfType(targetURI, targetType, context);
 }
 
-static bool isInstanceOfType(RefCountPointer<const ATBooleanOrDerived>& self, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool isInstanceOfType(RefCountPointer<const ATBooleanOrDerived>& self, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return isInstanceOfType(self, buff1.ptr(), buff2.ptr(), context);
 }
@@ -481,7 +481,7 @@ static void* getInterface(RefCountPointer<const ATBooleanOrDerived>& self, const
 	return self->getInterface(name);
 }
 
-static void* getInterface(RefCountPointer<const ATBooleanOrDerived>& self, const std::string& name) {
+static void* getInterface(RefCountPointer<const ATBooleanOrDerived>& self, const char* name) {
 	pyxerces::XMLString buff(name);
 	return getInterface(self, buff.ptr());
 }
@@ -521,20 +521,20 @@ void visit(T& class_) const {
 	.def("generateEvents", static_cast<void(*)(RefCountPointer<const ATQNameOrDerived>&, EventHandler* events, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::generateEvents))
 	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castAs))
 	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castAsNoCheck))
-	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castAsNoCheck))
+	.def("castAsNoCheck", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castAsNoCheck))
 	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castAs))
-	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castAs))
+	.def("castAs", static_cast<AnyAtomicType::Ptr(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castAs))
 	.def("castable", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castable))
-	.def("castable", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castable))
+	.def("castable", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, AnyAtomicType::AtomicObjectType, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::castable))
 	.def("isOfType", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::isOfType))
-	.def("isOfType", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::isOfType))
+	.def("isOfType", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::isOfType))
 	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::isInstanceOfType))
-	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::isInstanceOfType))
+	.def("isInstanceOfType", static_cast<bool(*)(RefCountPointer<const ATQNameOrDerived>&, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::isInstanceOfType))
 	.def("typeToBuffer", &RefCountPointerConstATQNameOrDerivedDefVisitor::typeToBuffer)
 	.def("castIsSupported", &RefCountPointerConstATQNameOrDerivedDefVisitor::castIsSupported)
 	//! Item
 	.def("getInterface", static_cast<void*(*)(RefCountPointer<const ATQNameOrDerived>&, const XMLCh*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
-	.def("getInterface", static_cast<void*(*)(RefCountPointer<const ATQNameOrDerived>&, const std::string&)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
+	.def("getInterface", static_cast<void*(*)(RefCountPointer<const ATQNameOrDerived>&, const char*)>(&RefCountPointerConstATQNameOrDerivedDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
 	;
 }
 
@@ -624,7 +624,7 @@ static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const ATQNameOrDerived>&
 	return self->castAsNoCheck(targetIndex, targetURI, targetType, context);
 }
 
-static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const ATQNameOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static AnyAtomicType::Ptr castAsNoCheck(RefCountPointer<const ATQNameOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castAsNoCheck(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -633,7 +633,7 @@ static AnyAtomicType::Ptr castAs(RefCountPointer<const ATQNameOrDerived>& self, 
 	return self->castAs(targetIndex, targetURI, targetType, context);
 }
 
-static AnyAtomicType::Ptr castAs(RefCountPointer<const ATQNameOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static AnyAtomicType::Ptr castAs(RefCountPointer<const ATQNameOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castAs(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -642,7 +642,7 @@ static bool castable(RefCountPointer<const ATQNameOrDerived>& self, AnyAtomicTyp
 	return self->castable(targetIndex, targetURI, targetType, context);
 }
 
-static bool castable(RefCountPointer<const ATQNameOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool castable(RefCountPointer<const ATQNameOrDerived>& self, AnyAtomicType::AtomicObjectType targetIndex, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return castable(self, targetIndex, buff1.ptr(), buff2.ptr(), context);
 }
@@ -651,7 +651,7 @@ static bool isOfType(RefCountPointer<const ATQNameOrDerived>& self, const XMLCh*
 	return self->isOfType(targetURI, targetType, context);
 }
 
-static bool isOfType(RefCountPointer<const ATQNameOrDerived>& self, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool isOfType(RefCountPointer<const ATQNameOrDerived>& self, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return isOfType(self, buff1.ptr(), buff2.ptr(), context);
 }
@@ -660,7 +660,7 @@ static bool isInstanceOfType(RefCountPointer<const ATQNameOrDerived>& self, cons
 	return self->isInstanceOfType(targetURI, targetType, context);
 }
 
-static bool isInstanceOfType(RefCountPointer<const ATQNameOrDerived>& self, const std::string& targetURI, const std::string& targetType, const DynamicContext* context) {
+static bool isInstanceOfType(RefCountPointer<const ATQNameOrDerived>& self, const char* targetURI, const char* targetType, const DynamicContext* context) {
 	pyxerces::XMLString buff1(targetURI), buff2(targetType);
 	return isInstanceOfType(self, buff1.ptr(), buff2.ptr(), context);
 }
@@ -678,7 +678,7 @@ static void* getInterface(RefCountPointer<const ATQNameOrDerived>& self, const X
 	return self->getInterface(name);
 }
 
-static void* getInterface(RefCountPointer<const ATQNameOrDerived>& self, const std::string& name) {
+static void* getInterface(RefCountPointer<const ATQNameOrDerived>& self, const char* name) {
 	pyxerces::XMLString buff(name);
 	return getInterface(self, buff.ptr());
 }
@@ -702,7 +702,7 @@ void visit(T& class_) const {
 	.def("typeToBuffer", &RefCountPointerConstNodeDefVisitor::typeToBuffer)
 	.def("asString", &RefCountPointerConstNodeDefVisitor::asString, boost::python::return_value_policy<boost::python::return_by_value>())
 	.def("hasInstanceOfType", static_cast<bool(*)(RefCountPointer<const Node>&, const XMLCh*, const XMLCh*, const DynamicContext*)>(&RefCountPointerConstNodeDefVisitor::hasInstanceOfType))
-	.def("hasInstanceOfType", static_cast<bool(*)(RefCountPointer<const Node>&, const std::string&, const std::string&, const DynamicContext*)>(&RefCountPointerConstNodeDefVisitor::hasInstanceOfType))
+	.def("hasInstanceOfType", static_cast<bool(*)(RefCountPointer<const Node>&, const char*, const char*, const DynamicContext*)>(&RefCountPointerConstNodeDefVisitor::hasInstanceOfType))
 	.def("dmBaseURI", &RefCountPointerConstNodeDefVisitor::dmBaseURI)
 	.def("dmNodeKind", &RefCountPointerConstNodeDefVisitor::dmNodeKind, boost::python::return_value_policy<boost::python::return_by_value>())
 	.def("dmNodeName", &RefCountPointerConstNodeDefVisitor::dmNodeName)
@@ -729,7 +729,7 @@ void visit(T& class_) const {
 	.def("generateEvents", static_cast<void(*)(RefCountPointer<const Node>&, EventHandler* events, const DynamicContext*)>(&RefCountPointerConstNodeDefVisitor::generateEvents))
 	//! Item
 	.def("getInterface", static_cast<void*(*)(RefCountPointer<const Node>&, const XMLCh*)>(&RefCountPointerConstNodeDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
-	.def("getInterface", static_cast<void*(*)(RefCountPointer<const Node>&, const std::string&)>(&RefCountPointerConstNodeDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
+	.def("getInterface", static_cast<void*(*)(RefCountPointer<const Node>&, const char*)>(&RefCountPointerConstNodeDefVisitor::getInterface), boost::python::return_value_policy<boost::python::return_opaque_pointer>())  //!< void*
 	;
 }
 
@@ -758,7 +758,7 @@ static bool hasInstanceOfType(RefCountPointer<const Node>& self, const XMLCh* ty
 	return self->hasInstanceOfType(typeURI, typeName, context);
 }
 
-static bool hasInstanceOfType(RefCountPointer<const Node>& self, const std::string& typeURI, const std::string& typeName, const DynamicContext* context) {
+static bool hasInstanceOfType(RefCountPointer<const Node>& self, const char* typeURI, const char* typeName, const DynamicContext* context) {
 	pyxerces::XMLString buff1(typeURI), buff2(typeName);
 	return self->hasInstanceOfType(buff1.ptr(), buff2.ptr(), context);
 }
@@ -864,7 +864,7 @@ static void* getInterface(RefCountPointer<const Node>& self, const XMLCh* name) 
 	return self->getInterface(name);
 }
 
-static void* getInterface(RefCountPointer<const Node>& self, const std::string& name) {
+static void* getInterface(RefCountPointer<const Node>& self, const char* name) {
 	pyxerces::XMLString buff(name);
 	return getInterface(self, buff.ptr());
 }

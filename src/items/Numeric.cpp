@@ -16,7 +16,7 @@
 
 #include <xqilla/items/Numeric.hpp>
 
-#include "util/XMLString.h"
+#include "../common/XMLString.h"
 
 namespace pyxqilla {
 

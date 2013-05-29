@@ -15,7 +15,7 @@
 
 #include <xqilla/items/ATDurationOrDerived.hpp>
 
-#include "util/XMLString.h"
+#include "../common/XMLString.h"
 
 namespace pyxqilla {
 

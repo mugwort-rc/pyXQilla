@@ -17,7 +17,7 @@
 
 #include <xqilla/items/AnyAtomicType.hpp>
 
-#include "util/XMLString.h"
+#include "../common/XMLString.h"
 
 namespace pyxqilla {
 

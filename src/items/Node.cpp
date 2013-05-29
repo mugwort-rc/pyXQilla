@@ -18,7 +18,7 @@
 
 #include <xqilla/items/Node.hpp>
 
-#include "util/XMLString.h"
+#include "../common/XMLString.h"
 
 namespace pyxqilla {
 

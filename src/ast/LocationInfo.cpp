@@ -39,7 +39,7 @@ void LocationInfo_init(void) {
 	//! LocationInfo
 	boost::python::class_<LocationInfo, boost::noncopyable>("LocationInfo")
 			.def(boost::python::init<const XMLCh*, unsigned int, unsigned int>())
-			.def(LocationInfoDefVisitor<std::string>())
+			.def(LocationInfoDefVisitor<char*>())
 			.def("getFile", &LocationInfo::getFile, boost::python::return_value_policy<boost::python::return_by_value>())
 			.def("getLine", &LocationInfo::getLine)
 			.def("getColumn", &LocationInfo::getColumn)
