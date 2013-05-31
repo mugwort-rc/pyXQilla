@@ -24,6 +24,7 @@
 #include "events/SequenceBuilder.h"
 
 // exceptions
+#include "exceptions/XQException.h"
 #include "exceptions/XQillaException.h"
 
 // framework
@@ -59,6 +60,8 @@ BOOST_PYTHON_MODULE(__XQilla)
 	// --------------------------------------------------
 	// ast
 	pyxqilla::LocationInfo_init();
+	// exceptions
+	pyxqilla::XQException_init();
 	// items
 	pyxqilla::Item_init();
 
