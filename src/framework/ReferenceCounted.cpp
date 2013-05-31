@@ -45,6 +45,49 @@ void makeRefCountPointer() {
 			;
 }
 
+template <class X>
+class RefCountPointerItemBasedCastDefVisitor
+: public boost::python::def_visitor<RefCountPointerItemBasedCastDefVisitor<X> >
+{
+friend class def_visitor_access;
+public:
+template <class T>
+void visit(T& class_) const {
+	class_
+	.def("toItem", &RefCountPointerItemBasedCastDefVisitor::toItem)
+	.def("toAtomicValue", &RefCountPointerItemBasedCastDefVisitor::toAtomicValue)
+	.def("toFunction", &RefCountPointerItemBasedCastDefVisitor::toFunction)
+	.def("toNode", &RefCountPointerItemBasedCastDefVisitor::toNode)
+	;
+}
+
+static Item::Ptr toItem(RefCountPointer<const X>& self) {
+	return Item::Ptr(self);
+}
+
+static AnyAtomicType::Ptr toAtomicValue(RefCountPointer<const X>& self) {
+	if ( ! self->isAtomicValue() ) {
+		return AnyAtomicType::Ptr(nullptr);
+	}
+	return AnyAtomicType::Ptr(self);
+}
+
+static FunctionRef::Ptr toFunction(RefCountPointer<const X>& self) {
+	if ( ! self->isFunction() ) {
+		return FunctionRef::Ptr(nullptr);
+	}
+	return FunctionRef::Ptr(self);
+}
+
+static Node::Ptr toNode(RefCountPointer<const X>& self) {
+	if ( ! self->isNode() ) {
+		return Node::Ptr(nullptr);
+	}
+	return Node::Ptr(self);
+}
+
+};
+
 // =================================================
 // const Item
 class RefCountPointerConstItemDefVisitor
@@ -55,6 +98,7 @@ public:
 template <class T>
 void visit(T& class_) const {
 	class_
+	.def(RefCountPointerItemBasedCastDefVisitor<Item>())
 	.def("isNode", &RefCountPointerConstItemDefVisitor::isNode)
 	.def("isAtomicValue", &RefCountPointerConstItemDefVisitor::isAtomicValue)
 	.def("isFunction", &RefCountPointerConstItemDefVisitor::isFunction)
@@ -132,6 +176,7 @@ template<class T>
 void visit(T& class_) const {
 	class_
 	//! AnyAtomicType
+	.def(RefCountPointerItemBasedCastDefVisitor<AnyAtomicType>())
 	.def("isAtomicValue", &RefCountPointerConstAnyAtomicTypeDefVisitor::isAtomicValue)
 	.def("isNode", &RefCountPointerConstAnyAtomicTypeDefVisitor::isNode)
 	.def("isFunction", &RefCountPointerConstAnyAtomicTypeDefVisitor::isFunction)
@@ -307,6 +352,7 @@ template<class T>
 void visit(T& class_) const {
 	class_
 	//! ATBooleanOrDerived
+	.def(RefCountPointerItemBasedCastDefVisitor<ATBooleanOrDerived>())
 	.def("getPrimitiveTypeName", &RefCountPointerConstATBooleanOrDerivedDefVisitor::getPrimitiveTypeName, boost::python::return_value_policy<boost::python::return_by_value>())
 	.def("getTypeURI", &RefCountPointerConstATBooleanOrDerivedDefVisitor::getTypeURI, boost::python::return_value_policy<boost::python::return_by_value>())
 	.def("getTypeName", &RefCountPointerConstATBooleanOrDerivedDefVisitor::getTypeName, boost::python::return_value_policy<boost::python::return_by_value>())
@@ -499,6 +545,7 @@ template<class T>
 void visit(T& class_) const {
 	class_
 	//! ATQNameOrDerived
+	.def(RefCountPointerItemBasedCastDefVisitor<ATQNameOrDerived>())
 	.def("getPrimitiveTypeName", &RefCountPointerConstATQNameOrDerivedDefVisitor::getPrimitiveTypeName, boost::python::return_value_policy<boost::python::return_by_value>())
 	.def("getTypeURI", &RefCountPointerConstATQNameOrDerivedDefVisitor::getTypeURI, boost::python::return_value_policy<boost::python::return_by_value>())
 	.def("getTypeName", &RefCountPointerConstATQNameOrDerivedDefVisitor::getTypeName, boost::python::return_value_policy<boost::python::return_by_value>())
@@ -696,6 +743,7 @@ template<class T>
 void visit(T& class_) const {
 	class_
 	//! Node
+	.def(RefCountPointerItemBasedCastDefVisitor<Node>())
 	.def("isNode", &RefCountPointerConstNodeDefVisitor::isNode)
 	.def("isAtomicValue", &RefCountPointerConstNodeDefVisitor::isAtomicValue)
 	.def("isFunction", &RefCountPointerConstNodeDefVisitor::isFunction)
