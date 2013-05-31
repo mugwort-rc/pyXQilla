@@ -27,6 +27,9 @@
 #include "exceptions/XQException.h"
 #include "exceptions/XQillaException.h"
 
+// fastxdm
+#include "fastxdm/FastXDMConfiguration.h"
+
 // framework
 #include "framework/ReferenceCounted.h"
 
@@ -48,10 +51,14 @@
 
 // simple-api
 #include "simple-api/XQilla.h"
+#include "simple-api/XQillaConfiguration.h"
 #include "simple-api/XQQuery.h"
 
 // utils
 #include "utils/XQillaPlatformUtils.h"
+
+// xerces
+#include "xerces/XercesConfiguration.h"
 
 BOOST_PYTHON_MODULE(__XQilla)
 {
@@ -64,6 +71,8 @@ BOOST_PYTHON_MODULE(__XQilla)
 	pyxqilla::XQException_init();
 	// items
 	pyxqilla::Item_init();
+	// simple-api
+	pyxqilla::XQillaConfiguration_init();
 
 	// inherited (depth:2) classes
 	// items
@@ -98,6 +107,11 @@ BOOST_PYTHON_MODULE(__XQilla)
 	pyxqilla::XQillaException_init();
 
 	// ==================================================
+	// fastxdm
+	// --------------------------------------------------
+	pyxqilla::FastXDMConfiguration_init();
+
+	// ==================================================
 	// framework
 	// --------------------------------------------------
 	pyxqilla::ReferenceCounted_init();
@@ -128,6 +142,11 @@ BOOST_PYTHON_MODULE(__XQilla)
 	// utils
 	// --------------------------------------------------
 	pyxqilla::XQillaPlatformUtils_init();
+
+	// ==================================================
+	// xerces
+	// --------------------------------------------------
+	pyxqilla::XercesConfiguration_init();
 }
 
 
