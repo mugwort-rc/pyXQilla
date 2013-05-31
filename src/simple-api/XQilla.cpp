@@ -26,6 +26,7 @@ namespace pyxqilla {
 class XQillaDefVisitor
 : public boost::python::def_visitor<XQillaDefVisitor>
 {
+friend class def_visitor_access;
 public:
 template <class T>
 void visit(T& class_) const {
