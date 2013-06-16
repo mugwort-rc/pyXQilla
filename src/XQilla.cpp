@@ -20,6 +20,11 @@
 #include "debug/DebugListener.h"
 #include "debug/StackFrame.h"
 
+// dom-api
+#include "dom-api/XPath2Result.h"
+#include "dom-api/XQillaExpression.h"
+#include "dom-api/XQillaNSResolver.h"
+
 // events
 #include "events/SequenceBuilder.h"
 
@@ -95,6 +100,13 @@ BOOST_PYTHON_MODULE(__XQilla)
 	// --------------------------------------------------
 	pyxqilla::DebugListener_init();
 	pyxqilla::StackFrame_init();
+
+	// ==================================================
+	// dom-api
+	// --------------------------------------------------
+	pyxqilla::XPath2Result_init();
+	pyxqilla::XQillaExpression_init();
+	pyxqilla::XQillaNSResolver_init();
 
 	// ==================================================
 	// events
