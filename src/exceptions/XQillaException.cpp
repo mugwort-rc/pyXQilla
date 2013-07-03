@@ -11,6 +11,8 @@
 #include <xqilla/exceptions/XQException.hpp>
 #include <xqilla/exceptions/XQillaException.hpp>
 
+#include "../common/XMLString.h"
+
 namespace pyxqilla {
 
 //! XQillaException
@@ -19,7 +21,11 @@ PyObject* pyXQillaExceptionType = nullptr;
 void translateXQillaException(const XQillaException& e) {
 	assert(pyXQillaExceptionType != nullptr);
 	boost::python::object instance(e);
-	PyErr_SetObject(pyXQillaExceptionType, instance.ptr());
+
+	boost::python::object exceptionType(boost::python::handle<>(boost::python::borrowed(pyXQillaExceptionType)));
+	exceptionType.attr("cause") = instance;
+
+	PyErr_SetString(pyXQillaExceptionType, pyxerces::XMLString(e.getString()).toString().c_str());
 }
 
 void XQillaException_init(void) {
