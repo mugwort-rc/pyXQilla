@@ -27,6 +27,7 @@
 #include "dom-api/XQillaNSResolver.h"
 
 // events
+#include "events/EventHandler.h"
 #include "events/SequenceBuilder.h"
 
 // exceptions
@@ -76,6 +77,8 @@ BOOST_PYTHON_MODULE(__XQilla)
 	pyxqilla::LocationInfo_init();
 	// context
 	pyxqilla::StaticContext_init();
+	// events
+	pyxqilla::EventHandler_init();
 	// exceptions
 	pyxqilla::XQException_init();
 	// items
