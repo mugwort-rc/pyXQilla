@@ -38,6 +38,7 @@
 
 // framework
 #include "framework/ReferenceCounted.h"
+#include "framework/XPath2MemoryManager.h"
 
 // items
 #include "items/AnyAtomicType.h"
@@ -130,6 +131,7 @@ BOOST_PYTHON_MODULE(__XQilla)
 	// framework
 	// --------------------------------------------------
 	pyxqilla::ReferenceCounted_init();
+	pyxqilla::XPath2MemoryManager_init();
 
 	// ==================================================
 	// items
