@@ -29,6 +29,7 @@
 // events
 #include "events/EventHandler.h"
 #include "events/EventSerializer.h"
+#include "events/NSFixupFilter.h"
 #include "events/SequenceBuilder.h"
 
 // exceptions
@@ -120,6 +121,7 @@ BOOST_PYTHON_MODULE(__XQilla)
 	// events
 	// --------------------------------------------------
 	pyxqilla::EventSerializer_init();
+	pyxqilla::NSFixupFilter_init();
 	pyxqilla::SequenceBuilder_init();
 
 	// ==================================================
