@@ -15,6 +15,7 @@
 // context
 #include "context/DynamicContext.h"
 #include "context/RegexGroupStore.h"
+#include "context/StaticContext.h"
 
 // debug
 #include "debug/DebugListener.h"
@@ -72,6 +73,8 @@ BOOST_PYTHON_MODULE(__XQilla)
 	// --------------------------------------------------
 	// ast
 	pyxqilla::LocationInfo_init();
+	// context
+	pyxqilla::StaticContext_init();
 	// exceptions
 	pyxqilla::XQException_init();
 	// items

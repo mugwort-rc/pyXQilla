@@ -102,7 +102,7 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(DynamicCOntextResolveDefaultCollectionOve
 
 void DynamicContext_init(void) {
 	//! DynamicContext
-	boost::python::class_<DynamicContext, boost::noncopyable>("DynamicContext", boost::python::no_init)
+	boost::python::class_<DynamicContext, boost::noncopyable, boost::python::bases<StaticContext> >("DynamicContext", boost::python::no_init)
 			.def(DynamicContextDefVisitor<char*>())
 			.def("createModuleDynamicContext", &DynamicContext::createModuleDynamicContext, DynamicContextCreateModuleDynamicContextOverloads()[boost::python::return_value_policy<boost::python::reference_existing_object>()])
 			.def("clearDynamicContext", &DynamicContext::clearDynamicContext)
