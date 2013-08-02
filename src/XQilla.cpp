@@ -16,6 +16,7 @@
 #include "context/DynamicContext.h"
 #include "context/RegexGroupStore.h"
 #include "context/StaticContext.h"
+#include "context/URIResolver.h"
 
 // debug
 #include "debug/DebugListener.h"
@@ -103,6 +104,7 @@ BOOST_PYTHON_MODULE(__XQilla)
 	// --------------------------------------------------
 	pyxqilla::DynamicContext_init();
 	pyxqilla::RegexGroupStore_init();
+	pyxqilla::URIResolver_init();
 
 	// ==================================================
 	// debug
