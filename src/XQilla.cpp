@@ -54,6 +54,9 @@
 #include "items/Node.h"
 #include "items/Numeric.h"
 
+// optimizer
+#include "optimizer/QueryPathNode.h"
+
 // runtime
 #include "runtime/EmptyResult.h"
 #include "runtime/Result.h"
@@ -150,6 +153,11 @@ BOOST_PYTHON_MODULE(__XQilla)
 	pyxqilla::ATDurationOrDerived_init();
 	pyxqilla::ATQNameOrDerived_init();
 	pyxqilla::Node_init();
+
+	// ==================================================
+	// optimizer
+	// --------------------------------------------------
+	pyxqilla::QueryPathNode_init();
 
 	// ==================================================
 	// runtime
