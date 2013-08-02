@@ -31,6 +31,10 @@
 
 #include "../common/XMLString.h"
 
+//! for Node special case
+#include <xqilla/xerces/XercesConfiguration.hpp>
+#include <xercesc/dom/DOMNode.hpp>
+
 namespace pyxqilla {
 
 template <typename NAME, class T, class D>
@@ -733,6 +737,25 @@ static void* getInterface(RefCountPointer<const ATQNameOrDerived>& self, const c
 };
 
 // =================================================
+//! Node special def_visitor
+class NodeSpecialDefVisitor
+: public boost::python::def_visitor<NodeSpecialDefVisitor>
+{
+friend class def_visitor_access;
+public:
+template <class T>
+void visit(T& class_) const {
+	class_
+	.def("getXercesNode", &getXercesNode, boost::python::return_value_policy<boost::python::reference_existing_object>())
+	;
+}
+
+static xercesc::DOMNode* getXercesNode(Node::Ptr& self) {
+	return static_cast<xercesc::DOMNode*>(self->getInterface(XercesConfiguration::gXerces));
+}
+
+};
+
 // const Node
 class RefCountPointerConstNodeDefVisitor
  : public boost::python::def_visitor<RefCountPointerConstNodeDefVisitor>
@@ -744,6 +767,7 @@ void visit(T& class_) const {
 	class_
 	//! Node
 	.def(RefCountPointerItemBasedCastDefVisitor<Node>())
+	.def(NodeSpecialDefVisitor())
 	.def("isNode", &RefCountPointerConstNodeDefVisitor::isNode)
 	.def("isAtomicValue", &RefCountPointerConstNodeDefVisitor::isAtomicValue)
 	.def("isFunction", &RefCountPointerConstNodeDefVisitor::isFunction)
