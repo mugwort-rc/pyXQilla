@@ -66,17 +66,68 @@ virtual ~URIResolverWrapper(void)
 
 bool resolveDocument(Sequence &result, const XMLCh* uri, DynamicContext *context, const QueryPathNode *projection)
 {
-	return this->get_override("resolveDocument")(boost::ref(result), pyxerces::XMLString(uri), boost::python::ptr(context), boost::python::ptr(projection));
+	boost::python::object obj = this->get_override("resolveDocument")(pyxerces::XMLString(uri), boost::python::ptr(context), boost::python::ptr(projection));
+	if ( obj.is_none() || ! boost::python::extract<boost::python::tuple>(obj).check() ) {
+		return false;
+	}
+	boost::python::tuple tup = boost::python::extract<boost::python::tuple>(obj);
+	if ( boost::python::len(tup) != 2 ) {
+		return false;
+	}
+	if ( ! boost::python::extract<bool>(tup[0]).check() || ! boost::python::extract<Node::Ptr>(tup[1]).check() ) {
+		return false;
+	}
+	bool rflag = boost::python::extract<bool>(tup[0]);
+	Node::Ptr ptr = boost::python::extract<Node::Ptr>(tup[1]);
+	if ( ptr.isNull() ) {
+		return false;
+	}
+	result = Sequence(ptr);
+	return rflag;
 }
 
 bool resolveCollection(Sequence &result, const XMLCh* uri, DynamicContext *context, const QueryPathNode *projection)
 {
-	return this->get_override("resolveCollection")(boost::ref(result), pyxerces::XMLString(uri), boost::python::ptr(context), boost::python::ptr(projection));
+	boost::python::object obj = this->get_override("resolveCollection")(pyxerces::XMLString(uri), boost::python::ptr(context), boost::python::ptr(projection));
+	if ( obj.is_none() || ! boost::python::extract<boost::python::tuple>(obj).check() ) {
+		return false;
+	}
+	boost::python::tuple tup = boost::python::extract<boost::python::tuple>(obj);
+	if ( boost::python::len(tup) != 2 ) {
+		return false;
+	}
+	if ( ! boost::python::extract<bool>(tup[0]).check() || ! boost::python::extract<Node::Ptr>(tup[1]).check() ) {
+		return false;
+	}
+	bool rflag = boost::python::extract<bool>(tup[0]);
+	Node::Ptr ptr = boost::python::extract<Node::Ptr>(tup[1]);
+	if ( ptr.isNull() ) {
+		return false;
+	}
+	result = Sequence(ptr);
+	return rflag;
 }
 
 bool resolveDefaultCollection(Sequence &result, DynamicContext *context, const QueryPathNode *projection)
 {
-	return this->get_override("resolveDefaultCollection")(boost::ref(result), boost::python::ptr(context), boost::python::ptr(projection));
+	boost::python::object obj = this->get_override("resolveDefaultCollection")(boost::python::ptr(context), boost::python::ptr(projection));
+	if ( obj.is_none() || ! boost::python::extract<boost::python::tuple>(obj).check() ) {
+		return false;
+	}
+	boost::python::tuple tup = boost::python::extract<boost::python::tuple>(obj);
+	if ( boost::python::len(tup) != 2 ) {
+		return false;
+	}
+	if ( ! boost::python::extract<bool>(tup[0]).check() || ! boost::python::extract<Node::Ptr>(tup[1]).check() ) {
+		return false;
+	}
+	bool rflag = boost::python::extract<bool>(tup[0]);
+	Node::Ptr ptr = boost::python::extract<Node::Ptr>(tup[1]);
+	if ( ptr.isNull() ) {
+		return false;
+	}
+	result = Sequence(ptr);
+	return rflag;
 }
 
 bool putDocument(const Node::Ptr &document, const XMLCh *uri, DynamicContext *context)
